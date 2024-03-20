@@ -77,6 +77,28 @@ def enregistrer_client():
     conn.close()
     return redirect('/consultation/')  # Rediriger vers la page d'accueil après l'enregistrement
 
+@app.route('/ajouter_livre', methods=['GET', 'POST'])
+def ajouter_livre():
+    if not est_authentifie() or session.get('role') != 'administrateur':
+        return redirect(url_for('authentification'))
+
+    if request.method == 'POST':
+        titre = request.form['titre']
+        auteur = request.form['auteur']
+        annee_publication = request.form['annee_publication']
+
+        conn = sqlite3.connect('database.db')
+        cursor = conn.cursor()
+
+        cursor.execute('INSERT INTO livres (titre, auteur, annee_publication) VALUES (?, ?, ?)', 
+                       (titre, auteur, annee_publication))
+        conn.commit()
+        conn.close()
+        return redirect('/liste_livres')
+    else:
+        return render_template('ajouter_livre.html')
+
+
 import sqlite3
 
                                                                                                                                        
