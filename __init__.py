@@ -92,6 +92,28 @@ def ajouter_livre():
         return redirect('/liste_livres')
     return render_template('ajouter_livre.html')
 
+@app.route('/recherche_livres', methods=['GET', 'POST'])
+def recherche_livres():
+    if request.method == 'POST':
+        titre = request.form.get('titre', '')
+        auteur = request.form.get('auteur', '')
+        conn = sqlite3.connect('database.db')
+        cur = conn.cursor()
+        cur.execute("SELECT * FROM livres WHERE titre LIKE ? OR auteur LIKE ?", ('%'+titre+'%', '%'+auteur+'%'))
+        data = cur.fetchall()
+        return render_template('recherche_livres.html', data=data)
+    return render_template('recherche_livres.html', data=None)
+
+@app.route('/emprunter_livre/<int:livre_id>', methods=['GET', 'POST'])
+def emprunter_livre(livre_id):
+    if request.method == 'POST':
+        conn = sqlite3.connect('database.db')
+        cur = conn.cursor()
+        cur.execute("UPDATE livres SET disponible = 0 WHERE id = ?", (livre_id,))
+        conn.commit()
+        return redirect('/liste_livres')
+
+
 
 
 import sqlite3
