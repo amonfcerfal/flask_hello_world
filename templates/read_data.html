@@ -1,41 +1,29 @@
-<!DOCTYPE>
+<!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>Clients</title>
+    <title>Liste des Livres</title>
 </head>
 <body>
-    <h1>Liste des Clients</h1>
+    <h1>Liste des Livres</h1>
     <table>
         <tr>
             <th>ID</th>
-            <th>Création</th>
-            <th>Nom</th>
-            <th>Prénom</th>
-            <th>Adresse</th>
+            <th>Titre</th>
+            <th>Auteur</th>
+            <th>Année</th>
+            <th>Disponible</th>
         </tr>
-        {% for row in data %}
+        {% for livre in livres %}
         <tr>
-            <td>{{ row[0] }}</td>
-            <td>{{ row[1] }}</td>
-            <td>{{ row[2] }}</td>
-            <td>{{ row[3] }}</td>
-            <td>{{ row[4] }}</td>
+            <td>{{ livre.id }}</td>
+            <td>{{ livre.titre }}</td>
+            <td>{{ livre.auteur }}</td>
+            <td>{{ livre.annee }}</td>
+            <td>{{ 'Oui' if livre.disponible else 'Non' }}</td>
         </tr>
         {% endfor %}
     </table>
-
-    <h1>Ajouter un nouveau livre</h1>
-    <form method="post">
-        <label for="titre">Titre:</label><br>
-        <input type="text" id="titre" name="titre" required><br>
-        <label for="auteur">Auteur:</label><br>
-        <input type="text" id="auteur" name="auteur" required><br>
-        <label for="annee_publication">Année de Publication:</label><br>
-        <input type="number" id="annee_publication" name="annee_publication"><br><br>
-        <input type="submit" value="Ajouter">
-    </form>
-</html>
-
 </body>
 </html>
+
