@@ -113,6 +113,16 @@ def emprunter_livre(livre_id):
         conn.commit()
         return redirect('/liste_livres')
 
+@app.route('/liste_livres')
+def liste_livres():
+    conn = sqlite3.connect('database.db')
+    cur = conn.cursor()
+    cur.execute("SELECT * FROM livres ORDER BY titre ASC")
+    livres = cur.fetchall()
+    conn.close()
+    return render_template('liste_livres.html', livres=livres)
+
+
 
 
 
