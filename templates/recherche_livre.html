@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Recherche de Livres</title>
+</head>
+<body>
+    <h1>Recherche de Livres</h1>
+    <form action="/recherche_livres" method="post">
+        <label for="critere">Critère de recherche:</label>
+        <input type="text" id="critere" name="critere" placeholder="Titre, auteur, année...">
+        <input type="submit" value="Rechercher">
+    </form>
+    {% if livres %}
+        <h2>Résultats de la recherche:</h2>
+        <ul>
+            {% for livre in livres %}
+            <li>{{ livre.titre }} par {{ livre.auteur }} ({{ livre.annee }})</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+</body>
+</html>
