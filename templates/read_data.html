@@ -24,5 +24,18 @@
         </tr>
         {% endfor %}
     </table>
+
+    <h1>Ajouter un nouveau livre</h1>
+    <form method="post">
+        <label for="titre">Titre:</label><br>
+        <input type="text" id="titre" name="titre" required><br>
+        <label for="auteur">Auteur:</label><br>
+        <input type="text" id="auteur" name="auteur" required><br>
+        <label for="annee_publication">Année de Publication:</label><br>
+        <input type="number" id="annee_publication" name="annee_publication"><br><br>
+        <input type="submit" value="Ajouter">
+    </form>
+</html>
+
 </body>
 </html>
